@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const db = require('.');
 module.exports = (sequelize, DataTypes) => {
   class Art extends Model {
     /**
@@ -14,6 +15,31 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.Detail)
 
     }
+    static getArt = async (req, res) => {
+      try {
+          const updateArt =await db.Art.update({
+            type: req.body.name,
+            creator: req.body.creator,
+            title: req.body.title,
+            year: req.body.year,
+            country: req.body.country,
+            inspiration: req.body.inspiration,
+
+       },
+       {where: {id: req.params.id} });
+       return res.status(201).send({
+          art: artsDetails,
+          status: 200
+      });
+      }
+      catch (error) {
+          return res.status(400).send({
+              message: 'Unable to update data',
+              errors: error,
+              status: 400
+          });
+      }
+  }
   };
   Art.init({
     type: DataTypes.STRING,

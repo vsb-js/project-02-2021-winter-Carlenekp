@@ -1,5 +1,8 @@
 const express = require("express");
 const db = require("../models/index");
+const cors = require("cors");
+
+app.use(cors());
 
 const app = express()
 
@@ -160,9 +163,27 @@ app.post('/details/create', async (req, res) => {
 });
 
 //Update
-app.put('/arts/update/replace/:id/:type', (req, res, next) => {
+app.put('/arts/update/replace/:id',arts.updateArt, (req, res) => {
    //console.log(req.params.id);
-   res.redirect(303, 'path')
+   /*exports.update = (req, res) => {
+    const id = req.params.id;
+  
+    db.Art.update(req.body, {
+      where: { id: id }
+    })
+     
+          res.send({
+            message: "Tutorial was updated successfully."     
+            })
+    
+      .catch(err => {
+        res.status(500).send({
+          message: "Error updating Tutorial with id=" + id
+        });
+      })
+      } */
+    
+   /* res.redirect(303, 'path')
    db.Art.serialize(()=>{
     db.Art.run('UPDATE emp SET type = ? WHERE id = ?', [req.params.type,req.params.id], function(err){
       if(err){
@@ -172,7 +193,7 @@ app.put('/arts/update/replace/:id/:type', (req, res, next) => {
       res.send("Entry updated successfully");
       console.log("Entry updated successfully");
     });
-  });
+  }); */
 
    /*try {
     res.json(await db.Art.create(req.params.id, req.body));
@@ -233,7 +254,7 @@ app.put('/arts/update/replace/:id/:type', (req, res, next) => {
            */
           
   
-  
+    
 })  
 /*
 app.patch('/arts/update/modify', (req, res) => {
