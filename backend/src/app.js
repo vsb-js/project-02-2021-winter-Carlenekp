@@ -1,8 +1,8 @@
 const express = require("express");
 const db = require("../models/index");
-const cors = require("cors");
+/*const cors = require("cors");
 
-app.use(cors());
+app.use(cors()); */
 
 const app = express()
 
@@ -163,6 +163,7 @@ app.post('/details/create', async (req, res) => {
 });
 
 //Update
+/*
 app.put('/arts/update/replace/:id',arts.updateArt, (req, res) => {
    //console.log(req.params.id);
    /*exports.update = (req, res) => {
@@ -255,7 +256,7 @@ app.put('/arts/update/replace/:id',arts.updateArt, (req, res) => {
           
   
     
-})  
+//})  
 /*
 app.patch('/arts/update/modify', (req, res) => {
 res.send("PUT Request Called")
@@ -301,11 +302,6 @@ app.delete('/details/:id', async (req, res) => {
 
 })
 
-
-
-
-
-// this only show that it listen on port 3000.
 
 
 module.exports = {app};
