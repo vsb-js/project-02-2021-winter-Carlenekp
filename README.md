@@ -6,7 +6,7 @@ project-02-2021-winter-Carlenekp created by GitHub Classroom
 -cd frontend
 -npm start
 
-then in an other command
+then in an other terminal
 -cd backend
 -npm start
 
