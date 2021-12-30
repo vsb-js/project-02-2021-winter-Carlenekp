@@ -52,7 +52,7 @@ export function Details() {
                   <TableCell component="th" scope="row">
                     {row.review} 
                   </TableCell>
-                  <TableCell>{row.equipment}</TableCell>
+                  <TableCell>{row.equipement}</TableCell>
                   <TableCell component="th" scope="row">
                     {row.movement} 
                   </TableCell>

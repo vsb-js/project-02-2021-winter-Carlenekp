@@ -187,7 +187,7 @@ app.post('/arts', async (req, res) => {
 
 
 
-app.post('/details/create', async (req, res) => {
+app.post('/details', async (req, res) => {
     const mydata = req.body
     console.debug("Body request:")
     console.debug(mydata)

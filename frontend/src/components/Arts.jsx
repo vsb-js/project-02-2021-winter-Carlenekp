@@ -31,7 +31,6 @@ export function Arts() {
     return <div>Loading...</div>;
   }
 
-  // using simple table https://mui.com/components/tables/
   return (
     <Grid container justifyContent={"center"} spacing={2}>
       <Grid item>
@@ -39,6 +38,7 @@ export function Arts() {
           <Table>
             <TableHead>
               <TableRow>
+              <TableCell>Id</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Creator</TableCell>
                 <TableCell>Title</TableCell>
@@ -51,6 +51,9 @@ export function Arts() {
             <TableBody>
               {data.map((row) => (
                 <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                  <TableCell component="th" scope="row">
+                    {row.id} 
+                  </TableCell>
                   <TableCell component="th" scope="row">
                     {row.type} 
                   </TableCell>
@@ -78,6 +81,14 @@ export function Arts() {
           to={"/arts/createArt"}
         >
           Create Art
+        </Button>
+        <Button
+          variant="outlined"
+          startIcon={<AddIcon />}
+          component={Link}
+          to={"/arts/deleteArt"}
+        >
+          Delete Art
         </Button>
       </Grid>
     </Grid>

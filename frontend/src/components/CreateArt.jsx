@@ -20,23 +20,35 @@ export function CreateArt() {
   const [actionResult, setActionResult] = useState(null);
 
   function onTitleChange(e) {
-    // To get the value of the field, it's the same as before with any input
     const inputValue = e.target.value;
-
-    // Using the current state object might lead to issues because setState is async action!
-    // !! THIS IS WRONG !!
-    // const newState = { ...formState, ...{ firstName: inputValue } };
-    // setFormState(newState);
-
-    // setState can accept callback (a function) which gives you the previous state variable in the correct format
     setFormState ((prevState) => {
-      return { ...prevState, ...{ creator: inputValue } };
+      return { ...prevState, ...{ title: inputValue } };
     });
   }
 
   function onTypeChange(e) {
     setFormState((prevState) => {
       return { ...prevState, ...{ type: e.target.value } };
+    });
+  }
+  function onCreatorChange(e) {
+    setFormState((prevState) => {
+      return { ...prevState, ...{  creator: e.target.value } };
+    });
+  }
+  function onYearChange(e) {
+    setFormState((prevState) => {
+      return { ...prevState, ...{ year: e.target.value } };
+    });
+  }
+  function onCountryChange(e) {
+    setFormState((prevState) => {
+      return { ...prevState, ...{ country: e.target.value } };
+    });
+  }
+  function onInspirationChange(e) {
+    setFormState((prevState) => {
+      return { ...prevState, ...{ inspiration: e.target.value } };
     });
   }
 
@@ -47,7 +59,7 @@ export function CreateArt() {
     // We could include some form validation
 
     axios
-      .post(`${apiUrl}/arts/create`, {
+      .post(`${apiUrl}/arts`, {
         type: formState.type,
         creator: formState.creator,
         title: formState.title,
@@ -90,6 +102,22 @@ export function CreateArt() {
         <div>
           <TextField
             required
+            id="type"
+            label="Type"
+            defaultValue=""
+            value={formState.type}
+            onChange={onTypeChange}
+          />
+          <TextField
+            required
+            id="creator"
+            label="Creator"
+            defaultValue=""
+            value={formState.creator}
+            onChange={onCreatorChange}
+          />
+          <TextField
+            required
             id="title"
             label="Title"
             defaultValue=""
@@ -98,11 +126,27 @@ export function CreateArt() {
           />
           <TextField
             required
-            id="type"
-            label="Type"
+            id="year"
+            label="Year"
             defaultValue=""
-            value={formState.type}
-            onChange={onTypeChange}
+            value={formState.year}
+            onChange={onYearChange}
+          />
+          <TextField
+            required
+            id="country"
+            label="Country"
+            defaultValue=""
+            value={formState.country}
+            onChange={onCountryChange}
+          />
+          <TextField
+            required
+            id="inspiration"
+            label="Inspiration"
+            defaultValue=""
+            value={formState.inspiration}
+            onChange={onInspirationChange}
           />
         </div>
         <Button variant="outlined" onClick={handleFormSubmit}>

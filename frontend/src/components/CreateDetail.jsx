@@ -18,15 +18,8 @@ export function CreateDetail() {
   const [actionResult, setActionResult] = useState(null);
 
   function onEquipementChange(e) {
-    // To get the value of the field, it's the same as before with any input
     const inputValue = e.target.value;
 
-    // Using the current state object might lead to issues because setState is async action!
-    // !! THIS IS WRONG !!
-    // const newState = { ...formState, ...{ firstName: inputValue } };
-    // setFormState(newState);
-
-    // setState can accept callback (a function) which gives you the previous state variable in the correct format
     setFormState ((prevState) => {
       return { ...prevState, ...{ equipement: inputValue } };
     });
@@ -37,6 +30,16 @@ export function CreateDetail() {
       return { ...prevState, ...{ movement: e.target.value } };
     });
   }
+  function onReviewChange(e) {
+    setFormState((prevState) => {
+      return { ...prevState, ...{ review: e.target.value } };
+    });
+  }
+  function onArtIdChange(e) {
+    setFormState((prevState) => {
+      return { ...prevState, ...{ artId: e.target.value } };
+    });
+  }
 
 
   function handleFormSubmit() {
@@ -45,7 +48,7 @@ export function CreateDetail() {
     // We could include some form validation
 
     axios
-      .post(`${apiUrl}/details/create`, {
+      .post(`${apiUrl}/details`, {
         review: formState.review,
         equipement: formState.equipement,
         movement: formState.movement,
@@ -82,6 +85,14 @@ export function CreateDetail() {
     <div>
       <Box component="form" noValidate>
         <div>
+        <TextField
+            required
+            id="review"
+            label="Review"
+            defaultValue=""
+            value={formState.review}
+            onChange={onReviewChange}
+          />
           <TextField
             required
             id="equipement"
@@ -97,6 +108,14 @@ export function CreateDetail() {
             defaultValue=""
             value={formState.movement}
             onChange={onMovementChange}
+          />
+          <TextField
+            required
+            id="artId"
+            label="ArtId"
+            defaultValue=""
+            value={formState.artId}
+            onChange={onArtIdChange}
           />
         </div>
         <Button variant="outlined" onClick={handleFormSubmit}>
