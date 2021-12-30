@@ -48,85 +48,127 @@ app.get('/details/', async (req, res) => {
 
 // Parametrized query
 app.get('/arts/:id', async (req, res) => {
+    try {
+        const {id} = req.params;
+        let arts = await db.Art.findAll({
+            where: {
+                id: id
+            }
+        });
+    
+        res.json(arts[0])
 
-    const {id} = req.params;
-    let arts = await db.Art.findAll({
-        where: {
-            id: id
-        }
-    });
-
-    res.json(arts[0])
+    } catch (e) {
+        console.error(e)
+        res.status(500);
+        res.send("Something wrong happens!")
+    }
 })
 
 app.get('/details/:id', async (req, res) => {
-
-    const {id} = req.params;
-    let details = await db.Detail.findAll({
-        where: {
-            id: id
-        }
-    });
-
-    res.json(details[0])
+    try {
+        const {id} = req.params;
+        let details = await db.Detail.findAll({
+            where: {
+                id: id
+            }
+        });
+    
+        res.json(details[0])
+    } catch (e) {
+        console.error(e)
+        res.status(500);
+        res.send("Something wrong happens!")
+    }
+    
 })
 
 
 app.get('/arts/title/:title', async (req, res)=>{
-    let title = req.params.title;
-    let arts = await db.Art.findAll({
-        where: {
-            title: title
-        }
-    })
-    res.json(arts);
+    try {
+        let title = req.params.title;
+        let arts = await db.Art.findAll({
+            where: {
+                title: title
+            }
+        })
+        res.json(arts);
+    } catch (e) {
+        console.error(e)
+        res.status(500);
+        res.send("Something wrong happens!")
+    }
 })
 
 app.get('/arts/creator/:creator', async(req, res)=>{
-    let creator = req.params.creator;
-    let arts = await db.Art.findAll({
+    try {
+        let creator = req.params.creator;
+        let arts = await db.Art.findAll({
         where:{
             creator: creator
         }
     })
     res.json(arts)
+    } catch (e) {
+        console.error(e)
+        res.status(500);
+        res.send("Something wrong happens!")
+    }
 })
 
-app.get('/arts/year/:year', async(req, res)=>{
-    let year = req.params.year;
-    let arts = await db.Art.findAll({
+app.get('/arts/year/:year', async(req, res)=>{ 
+    try {
+        let year = req.params.year;
+        let arts = await db.Art.findAll({
         where:{
             year: year
         }
     })
     res.json(arts)
+    } catch (e) {
+        console.error(e)
+        res.status(500);
+        res.send("Something wrong happens!")
+    }
 })
 
 app.get('/arts/country/:country', async(req, res)=>{
-    let country = req.params.country;
-    let arts = await db.Art.findAll({
-        where:{
-            country: country
-        }
-    })
-    res.json(arts)
+    try {
+        let country = req.params.country;
+        let arts = await db.Art.findAll({
+            where:{
+                country: country
+            }
+        })
+        res.json(arts)
+    } catch (e) {
+        console.error(e)
+        res.status(500);
+        res.send("Something wrong happens!")
+    }
 })
 
 app.get('/details/artId/:artId', async(req, res)=>{
-    let artId = req.params.artId;
-    let details = await db.Detail.findAll({
+    try {
+        let artId = req.params.artId;
+        let details = await db.Detail.findAll({
         where:{
             artId: artId
         }
     })
     res.json(details)
+    } catch (e) {
+        console.error(e)
+        res.status(500);
+        res.send("Something wrong happens!")
+    }
 })
 
 
 
 //CRUD
 //Create with a post
-app.post('/arts/create', async (req, res) => {
+app.post('/arts', async (req, res) => {
     const mydata = req.body
     console.debug("Body request:")
     console.debug(mydata)
