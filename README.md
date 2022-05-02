@@ -11,3 +11,5 @@ then in an other terminal
 -npm start
 
 => It will run the frontend then the backend with the database on port 3000
+
+To delete an art use "Postman"
